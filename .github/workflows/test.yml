@@ -13,4 +13,7 @@ jobs:
 
       - name: Run a one-line script
         run: curl --request POST 'http://google.com'
-        
+
+      - name: echo seccess
+        if: ${{ success() }}
+        run: echo seccccccceeeeeessssss
