@@ -12,10 +12,7 @@ jobs:
       build_result: ${{ steps.result.outputs.result }}
     steps:
       - uses: actions/checkout@v2
-
-      - name: Run a one-line script
-        run: curl --request POST 'http://google.com'
-
+      
       - name: Save build result
         id: result
         if: ${{ success() }}        
@@ -26,9 +23,6 @@ jobs:
     outputs:
       test_result: ${{ steps.result.outputs.result }}
     steps:
-      - name: Run a one-line script
-        run: curl --request POST 'http://google.com'
-        
       - name: Echo build result
         run: echo ${{ needs.build.outputs.test_result }}
 
@@ -43,9 +37,6 @@ jobs:
     outputs:
       deploy_result: ${{ steps.result.outputs.result }}
     steps:
-      - name: Run a one-line script
-        run: curl --request POST 'http://google.com'
-        
       - name: Echo test result
         run: echo ${{ needs.test.outputs.test_result }}
 
