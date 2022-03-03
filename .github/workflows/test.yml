@@ -17,3 +17,25 @@ jobs:
       - name: echo seccess
         if: ${{ success() }}
         run: echo seccccccceeeeeessssss
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: curl --request POST 'http://google.com'
+
+      - name: echo seccess
+        if: ${{ success() }}
+        run: echo seccccccceeeeeessssss
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a one-line script
+        run: curl --request POST 'http://google.com'
+
+      - name: echo seccess
+        if: ${{ success() }}
+        run: echo seccccccceeeeeessssss
