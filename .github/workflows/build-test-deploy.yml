@@ -16,7 +16,7 @@ jobs:
 
       - name: Save build result
         if: ${{ success() }}
-        run: echo "BUILD_RESULT=$(echo build_result)" >> $GITHUB_ENV
+        run: echo "::set-output name=BUILD_RESULT::$(echo "build_result")"        
   test:
     runs-on: ubuntu-latest
     needs: build
@@ -25,7 +25,7 @@ jobs:
         run: curl --request POST 'http://google.com'
         
       - name: Echo build result
-        run: echo ${{ env.BUILD_RESULT }}
+        run: echo ${{ steps.ver.outputs.BUILD_RESULT }}
 
       - name: Save test result
         if: ${{ success() }}
