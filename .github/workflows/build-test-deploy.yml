@@ -25,7 +25,7 @@ jobs:
         run: curl --request POST 'http://google.com'
         
       - name: Echo build result
-        run: echo $BUILD_RESULT
+        run: echo ${{ env.BUILD_RESULT }}
 
       - name: Save test result
         if: ${{ success() }}
@@ -35,7 +35,7 @@ jobs:
     needs: test
     steps:
       - name: Echo test result
-        run: echo $TEST_RESULT
+        run: echo ${{ env.TEST_RESULT }}
         
       - name: Run a one-line script
         run: curl --request POST 'http://google.com'
