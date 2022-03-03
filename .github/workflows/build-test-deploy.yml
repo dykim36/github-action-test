@@ -18,7 +18,9 @@ jobs:
         run: echo "::set-output name=result::$(echo "this is build result")"   
         
       - name: action-slack
-        uses: 8398a7/action-slack@v3.12.0
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   test:
