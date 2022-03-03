@@ -14,30 +14,26 @@ jobs:
       - name: Run a one-line script
         run: curl --request POST 'http://google.com'
 
-      - name: echo seccess
+      - name: Save build result
         if: ${{ success() }}
-        run: echo seccccccceeeeeessssss
+        run: echo "BUILD_RESULT=$(echo build_result)" >> $GITHUB_ENV
   test:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v2
-
       - name: Run a one-line script
         run: curl --request POST 'http://google.com'
 
-      - name: echo seccess
+      - name: Save test result
         if: ${{ success() }}
-        run: echo seccccccceeeeeessssss
+        run: echo "TEST_RESULT=$(echo test_result)" >> $GITHUB_ENV
   deploy:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - uses: actions/checkout@v2
-
       - name: Run a one-line script
         run: curl --request POST 'http://google.com'
 
-      - name: echo seccess
+      - name: Save deploy result
         if: ${{ success() }}
-        run: echo seccccccceeeeeessssss
+        run: echo "DEPLOY_RESULT=$(echo deploy_result)" >> $GITHUB_ENV
