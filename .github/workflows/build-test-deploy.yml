@@ -23,7 +23,7 @@ jobs:
       test_result: ${{ steps.result.outputs.result }}
     steps:
       - name: Echo build result
-        run: echo ${{ needs.build.outputs.test_result }}
+        run: echo ${{ needs.build.outputs.build_result }}
 
       - name: Save test result
         id: result
