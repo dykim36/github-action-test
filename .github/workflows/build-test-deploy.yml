@@ -16,8 +16,8 @@ jobs:
       - name: Save build result
         id: result    
         run: echo "::set-output name=result::$(echo "this is build result")"        
-      - name: Exit
-        run: exit 1
+      - name: curl error
+        run: curl http://123.321.555.10001
   test:
     runs-on: ubuntu-latest
     needs: build
