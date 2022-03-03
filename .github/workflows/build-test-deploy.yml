@@ -18,25 +18,30 @@ jobs:
 
       - name: Save build result
         id: result
-        if: ${{ success() }}
-        
-        run: echo "::set-output name=result::$(echo "this is result")"        
+        if: ${{ success() }}        
+        run: echo "::set-output name=result::$(echo "this is build result")"        
   test:
     runs-on: ubuntu-latest
     needs: build
+    outputs:
+      test_result: ${{ steps.result.outputs.result }}
     steps:
       - name: Run a one-line script
         run: curl --request POST 'http://google.com'
         
       - name: Echo build result
-        run: echo ${{ needs.build.outputs.build_result }}
+        run: echo ${{ needs.build.outputs.test_result }}
 
       - name: Save test result
-        if: ${{ success() }}
-        run: echo "TEST_RESULT=$(echo test_result)" >> $GITHUB_ENV
+        id: result
+        if: ${{ success() }}        
+        run: echo "::set-output name=result::$(echo "this is test result")"        
+
   deploy:
     runs-on: ubuntu-latest
     needs: test
+    outputs:
+      deploy_result: ${{ steps.result.outputs.result }}
     steps:
       - name: Echo test result
         run: echo ${{ env.TEST_RESULT }}
@@ -45,5 +50,6 @@ jobs:
         run: curl --request POST 'http://google.com'
 
       - name: Save deploy result
-        if: ${{ success() }}
-        run: echo "DEPLOY_RESULT=$(echo deploy_result)" >> $GITHUB_ENV
+        id: result
+        if: ${{ success() }}        
+        run: echo "::set-output name=result::$(echo "this is deploy result")"   
