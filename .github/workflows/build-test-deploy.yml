@@ -25,7 +25,7 @@ jobs:
         run: curl --request POST 'http://google.com'
         
       - name: Echo build result
-        run: echo ${{ steps.ver.outputs.BUILD_RESULT }}
+        run: echo ${{ needs.build.outputs.BUILD_RESULT }}
 
       - name: Save test result
         if: ${{ success() }}
