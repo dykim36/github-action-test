@@ -43,11 +43,11 @@ jobs:
     outputs:
       deploy_result: ${{ steps.result.outputs.result }}
     steps:
-      - name: Echo test result
-        run: echo ${{ env.TEST_RESULT }}
-        
       - name: Run a one-line script
         run: curl --request POST 'http://google.com'
+        
+      - name: Echo test result
+        run: echo ${{ needs.test.outputs.test_result }}
 
       - name: Save deploy result
         id: result
